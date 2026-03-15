@@ -1,3 +1,19 @@
-node_modules/
+# Dev context & documentation
+CLAUDE.md
+WEBSITE_CONTEXT.md
+
+# Screenshots & reference images
+nographism.com_.png
+Screenshot*.png
 temporary screenshots/
+
+# Claude local memory
 .claude/
+
+# Node / tooling
+node_modules/
+package-lock.json
+
+# OS
+.DS_Store
+Thumbs.db

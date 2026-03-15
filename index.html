@@ -711,34 +711,34 @@
     .scroll-nav-links a:hover::after { width: 100%; }
     /* Hamburger button */
     .hamburger {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 7px;
+      position: relative;
       background: none;
       border: 2px solid #1a1918;
       border-radius: 50%;
       cursor: pointer;
-      padding: 12px;
+      padding: 0;
       margin-left: 24px;
       width: 56px;
       height: 56px;
-      align-items: center;
       flex-shrink: 0;
       transition: background 0.2s ease, border-color 0.2s ease;
     }
     .hamburger span {
-      display: block;
-      width: 33px;
-      height: 3px;
+      position: absolute;
+      left: 50%;
+      width: 28px;
+      height: 2px;
       background: #1a1918;
-      border-radius: 2px;
+      transform: translateX(-50%);
       transition: transform 0.3s ease, opacity 0.2s ease;
       transform-origin: center;
     }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .hamburger span:nth-child(1) { top: 17px; }
+    .hamburger span:nth-child(2) { top: 25px; }
+    .hamburger span:nth-child(3) { top: 34px; }
+    .hamburger.open span:nth-child(1) { transform: translateX(-50%) translateY(8px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: translateX(-50%) scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateX(-50%) translateY(-9px) rotate(-45deg); }
 
     /* ── Scroll reveal ── */
     .reveal {
@@ -879,12 +879,12 @@
         <a class="timeline-entry" href="https://github.com/SamuelLin213/BTTAI-Amazon-Team-B" target="_blank">
           <div class="timeline-entry-text">
             <div class="timeline-num">01 — 06</div>
-            <div class="timeline-entry-name">Amazon — ML Inference</div>
-            <div class="timeline-entry-sub">Deployed low-latency ML inference pipelines on Amazon Advertising's Sponsored Products platform, improving relevance for 800M+ daily impressions.</div>
+            <div class="timeline-entry-name">AI Fellow @ Amazon</div>
+            <div class="timeline-entry-sub">Spent the semester developing a Machine Learning model to bolster Amazon's search engine efficiency. Collaborated cross functionally with engineers and product managers to ship out features.</div>
             <div class="timeline-entry-tags">
-              <span class="project-tag">Python</span>
-              <span class="project-tag">AWS</span>
+              <span class="project-tag">Data Science</span>
               <span class="project-tag">Machine Learning</span>
+              <span class="project-tag">Product Development</span>
             </div>
           </div>
           <div class="timeline-entry-img">
@@ -892,32 +892,16 @@
           </div>
         </a>
 
-        <!-- 02 DDA -->
-        <a class="timeline-entry" href="https://github.com/ViniciusDugue/Generative_Agents" target="_blank">
-          <div class="timeline-entry-text">
-            <div class="timeline-num">02 — 06</div>
-            <div class="timeline-entry-name">Dynamic Digital Agents</div>
-            <div class="timeline-entry-sub">Multi-agent AI system that dynamically selects and orchestrates specialized agents to solve complex multi-step tasks with tool use and memory.</div>
-            <div class="timeline-entry-tags">
-              <span class="project-tag">LLM</span>
-              <span class="project-tag">Python</span>
-              <span class="project-tag">Multi-Agent</span>
-            </div>
-          </div>
-          <div class="timeline-entry-img">
-            <img src="assets/dda.png" alt="Dynamic Digital Agents" loading="lazy" />
-          </div>
-        </a>
-
-        <!-- 03 CSULB Calendar -->
+        <!-- 02 CSULB Calendar -->
         <a class="timeline-entry" href="https://github.com/hunterDRuebsamen/CSULB_Calendar" target="_blank">
           <div class="timeline-entry-text">
-            <div class="timeline-num">03 — 06</div>
-            <div class="timeline-entry-name">CSULB Academic Calendar</div>
-            <div class="timeline-entry-sub">Full-stack scheduling platform serving CSULB students—course planning, deadline tracking, and smart reminders with a clean, accessible interface.</div>
+            <div class="timeline-num">02 — 06</div>
+            <div class="timeline-entry-name">Software Engineer @ CSULB</div>
+            <div class="timeline-entry-sub">Completely revamped the university's legacy academic calendar scheduling software. Built a full-stack calendar generator serving CSULB admins in their planning and deadline tracking of schooling terms.</div>
             <div class="timeline-entry-tags">
-              <span class="project-tag">React</span>
-              <span class="project-tag">Node.js</span>
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Streamlit</span>
+              <span class="project-tag">Linux</span>
               <span class="project-tag">Full-Stack</span>
             </div>
           </div>
@@ -926,32 +910,15 @@
           </div>
         </a>
 
-        <!-- 04 FCB Hackathon -->
-        <a class="timeline-entry" href="https://github.com/natefedidadev/FCB-Pressure-Cooker" target="_blank">
-          <div class="timeline-entry-text">
-            <div class="timeline-num">04 — 06</div>
-            <div class="timeline-entry-name">FC Barcelona "More than a Hack"</div>
-            <div class="timeline-entry-sub">Selected amongst 3500 global applicants to develop a tactical solution for the world's biggest soccer club. Presented project in Barcelona as a finalist.</div>
-            <div class="timeline-entry-tags">
-              <span class="project-tag">React</span>
-              <span class="project-tag">AI/ML</span>
-              <span class="project-tag">Winner</span>
-            </div>
-          </div>
-          <div class="timeline-entry-img">
-            <img src="assets/fcbhackathon.jpg" alt="FCB Hackathon" loading="lazy" />
-          </div>
-        </a>
-
-        <!-- 05 Eye Tracking -->
+        <!-- 03 Eye Tracking -->
         <a class="timeline-entry" href="#" target="_blank">
           <div class="timeline-entry-text">
-            <div class="timeline-num">05 — 06</div>
+            <div class="timeline-num">03 — 06</div>
             <div class="timeline-entry-name">Research Engineer @ D2 Laboratories</div>
             <div class="timeline-entry-sub">Built from the ground up an eye tracking research platform for CSULB's top researchers. Through this, I successfully replaced an expensive research procedure with a nearly free workflow.</div>
             <div class="timeline-entry-tags">
               <span class="project-tag">Computer Vision</span>
-              <span class="project-tag">Python</span>
+              <span class="project-tag">Machine Learning</span>
               <span class="project-tag">Research</span>
             </div>
           </div>
@@ -960,15 +927,51 @@
           </div>
         </a>
 
+        <!-- 04 DDA -->
+        <a class="timeline-entry" href="https://github.com/ViniciusDugue/Generative_Agents" target="_blank">
+          <div class="timeline-entry-text">
+            <div class="timeline-num">04 — 06</div>
+            <div class="timeline-entry-name">Dynamic Digital Agents</div>
+            <div class="timeline-entry-sub">Award winning, multi-agent AI system that dynamically selects and orchestrates specialized agents to survive in a dangerous landscape with tool use and memory.</div>
+            <div class="timeline-entry-tags">
+              <span class="project-tag">Large Language Models</span>
+              <span class="project-tag">Agentic AI</span>
+              <span class="project-tag">Retrieval Augmented Generation</span>
+            </div>
+          </div>
+          <div class="timeline-entry-img">
+            <img src="assets/dda.png" alt="Dynamic Digital Agents" loading="lazy" />
+          </div>
+        </a>
+
+        <!-- 05 FCB Hackathon -->
+        <a class="timeline-entry" href="https://github.com/natefedidadev/FCB-Pressure-Cooker" target="_blank">
+          <div class="timeline-entry-text">
+            <div class="timeline-num">05 — 06</div>
+            <div class="timeline-entry-name">FC Barcelona "More than a Hack"</div>
+            <div class="timeline-entry-sub">Chosen amongst 3500 global applicants to develop a tactical solution for the world's biggest soccer club. Presented the project in Barcelona as a finalist.</div>
+            <div class="timeline-entry-tags">
+              <span class="project-tag">React</span>
+              <span class="project-tag">AI/ML</span>
+              <span class="project-tag">Data Engineering</span>
+              <span class="project-tag">Python</span>
+            </div>
+          </div>
+          <div class="timeline-entry-img">
+            <img src="assets/fcbhackathon.jpg" alt="FCB Hackathon" loading="lazy" />
+          </div>
+        </a>
+
         <!-- 06 Kaggle -->
         <a class="timeline-entry" href="https://github.com/natefedidadev/Kaggle-NYBG" target="_blank">
           <div class="timeline-entry-text">
             <div class="timeline-num">06 — 06</div>
-            <div class="timeline-entry-name">Kaggle — NYBG Plant ID</div>
-            <div class="timeline-entry-sub">Computer vision model for fine-grained herbarium plant species identification. Top-percentile finish in the New York Botanical Garden Kaggle competition.</div>
+            <div class="timeline-entry-name">NYBG Kaggle Competition</div>
+            <div class="timeline-entry-sub">Developed a machine learning model to classify plant & fungi species from a large commercial dataset. Achieved an outstanding 96% classification rate and placed in the top 30 nationwide.</div>
             <div class="timeline-entry-tags">
-              <span class="project-tag">PyTorch</span>
-              <span class="project-tag">CNN</span>
+              <span class="project-tag">Machine Learning</span>
+              <span class="project-tag">Neural Networks</span>
+              <span class="project-tag">Image Classification</span>
               <span class="project-tag">Computer Vision</span>
             </div>
           </div>
@@ -1000,15 +1003,11 @@
       <div>
         <span class="about-tag">Based in Long Beach, CA</span>
         <h2 class="about-name reveal">Nathaniel<br>Fedida</h2>
-        <p class="about-title reveal">Software Engineer · Product Designer · CS @ CSULB</p>
+        <p class="about-title reveal">Software Engineer · Product Management · Innovation</p>
         <p class="about-bio reveal">
-          I'm a computer science student at Cal State Long Beach with a focus on
-          machine learning and human-computer interaction. I've interned at Amazon
-          building ML infrastructure at scale, competed in national hackathons, and
-          conduct UX research in CSULB's Human Factors Lab.
+          Welcome, thanks for stopping by! I'm Nate. A technically driven innovator who loves collaborating with people to develop impactful products.
           <br><br>
-          I care about the full stack—from model architecture to pixel-perfect
-          interfaces. When a product works well and feels right, that's the goal.
+          I care about the full product development lifecycle. When a product works well and feels right, that's the goal.
         </p>
       </div>
       <div class="flex gap-3 reveal">
@@ -1114,24 +1113,13 @@
         <a href="https://github.com/nfedida" target="_blank">GitHub</a>
         <a href="https://linkedin.com/in/nathanielfedida" target="_blank">LinkedIn</a>
         <a href="assets/Nathaniel Fedida - CS.pdf" target="_blank">Resume</a>
+        <a href="mailto:natefedidadev@gmail.com">Email</a>
       </div>
     </div>
   </section>
 
   <!-- ──────────────────────────────────────── FOOTER -->
   <footer>
-    <div class="footer-top">
-      <p>
-        Software engineer and product designer.<br>
-        CS @ Cal State Long Beach.
-      </p>
-      <div class="footer-links">
-        <a href="https://github.com/nfedida" target="_blank">GitHub</a>
-        <a href="https://linkedin.com/in/nathanielfedida" target="_blank">LinkedIn</a>
-        <a href="mailto:natefedidadev@gmail.com">Email</a>
-      </div>
-    </div>
-    <div class="footer-big">Nathaniel Fedida</div>
     <div class="footer-bottom">
       <span>© 2026 Nathaniel Fedida</span>
       <span>Long Beach, CA</span>
