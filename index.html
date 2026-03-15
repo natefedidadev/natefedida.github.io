@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nathaniel Fedida — Design & Engineering</title>
+  <meta name="description" content="Nathaniel Fedida — Software engineer and product designer building intelligent, human-centered systems." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            p1: '#cdd5fa',
+            p2: '#bcc3ea',
+            s1: '#7dd3fc',
+            s1h: '#0ea5e9',
+            sky: '#0ea5e9',
+            ink: '#1a1918',
+            paper: '#ffffff',
+            muted: '#6b6b68',
+            border: '#e8e7e3',
+            soft: '#f4f3ef',
+          },
+          fontFamily: {
+            sans: ['"Bricolage Grotesque"', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      background: #fff;
+      color: #1a1918;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ── Typography weights using variable font ── */
+    .fw-light  { font-variation-settings: 'wght' 300; }
+    .fw-reg    { font-variation-settings: 'wght' 400; }
+    .fw-med    { font-variation-settings: 'wght' 520; }
+    .fw-semi   { font-variation-settings: 'wght' 600; }
+    .fw-bold   { font-variation-settings: 'wght' 700; }
+
+    /* ── Hero ── */
+    .hero {
+      padding-top: 0;
+      min-height: 57vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-name-outer {
+      padding: 48px 0 0;
+      overflow: hidden;
+      line-height: 0.88;
+    }
+    .hero-name {
+      white-space: nowrap;
+      font-variation-settings: 'wght' 790;
+      letter-spacing: -0.05em;
+      line-height: 0.88;
+      display: block;
+      font-size: 9vw; /* fallback — overridden by JS */
+      padding: 0 24px;
+    }
+    /* Hero body: bio full width, then CTA + nav links on same row below */
+    .hero-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 16px 40px 56px;
+      gap: 32px;
+    }
+    .hero-bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .hero-nav {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 36px;
+      padding-bottom: 6px; /* align baseline with button */
+    }
+    .hero-nav a {
+      font-size: 51px;
+      font-variation-settings: 'wght' 450;
+      color: #1a1918;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      position: relative;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .hero-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1.5px;
+      background: #1a1918;
+      transition: width 0.25s ease;
+    }
+    .hero-nav a:hover::after { width: 100%; }
+    /* Active underline on Welcome by default */
+    .hero-nav a.active::after { width: 100%; }
+    .hero-top {
+      padding: 0;
+      /* bio and button, left column */
+    }
+    .hero-bio {
+      font-size: 48px;
+      font-variation-settings: 'wght' 400;
+      line-height: 1.1;
+      color: #1a1918;
+      max-width: 860px;
+      margin-bottom: 48px;
+    }
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 34px;
+      font-variation-settings: 'wght' 520;
+      color: #0c4a6e;
+      background: #bae6fd;
+      padding: 22px 48px;
+      border-radius: 100px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-cta:hover { background: #7dd3fc; transform: translateY(-1px); }
+    .btn-cta:active { transform: translateY(0); }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 17px;
+      font-variation-settings: 'wght' 520;
+      color: #1a1918;
+      background: transparent;
+      padding: 14px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      border: 1px solid #1a1918;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, transform 0.15s;
+    }
+    .btn-outline:hover { background: #1a1918; color: #fff; transform: translateY(-1px); }
+    .btn-outline:active { transform: translateY(0); }
+
+    /* ── Services table ── */
+    .services-section {
+      background: #bae6fd;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 80px 40px 100px;
+    }
+    .services-col {
+      padding: 0 40px;
+    }
+    .services-heading {
+      font-size: 60px;
+      font-variation-settings: 'wght' 400;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: #1a1918;
+      margin: 0 0 48px;
+    }
+    .services-list {
+      list-style: none;
+      border-top: 1px solid rgba(26,25,24,0.3);
+      padding: 0;
+      margin: 0;
+    }
+    .services-list li {
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(26,25,24,0.3);
+      font-size: 60px;
+      font-variation-settings: 'wght' 380;
+      color: #1a1918;
+      line-height: 1.1;
+    }
+
+    /* ── Marquee ── */
+    .marquee-wrap {
+      overflow: hidden;
+      border-top: 1px solid #e8e7e3;
+      border-bottom: 1px solid #e8e7e3;
+      padding: 12px 0;
+      background: #fff;
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee-scroll 28s linear infinite;
+    }
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      font-size: clamp(64px, 8vw, 112px);
+      font-variation-settings: 'wght' 700;
+      letter-spacing: -0.04em;
+      color: #1a1918;
+      padding-right: 40px;
+    }
+    .marquee-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #7dd3fc;
+      margin: 0 28px;
+      flex-shrink: 0;
+      position: relative;
+      top: 2px;
+    }
+    @keyframes marquee-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── Section commons ── */
+    .section-label {
+      font-size: 15px;
+      font-variation-settings: 'wght' 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #6b6b68;
+      margin-bottom: 48px;
+    }
+
+    /* ── Work section ── */
+    /* ── Timeline sticky scroll ── */
+    .timeline-section { padding: 0; }
+    .timeline-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 80px 80px 72px;
+      border-bottom: 1px solid #e8e7e3;
+    }
+    .timeline-header h2 {
+      font-size: clamp(32px, 4vw, 52px);
+      font-variation-settings: 'wght' 650;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      max-width: 460px;
+    }
+    .timeline-header-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-left: 40px;
+    }
+    .timeline-header-right p {
+      font-size: 14px;
+      font-variation-settings: 'wght' 400;
+      line-height: 1.7;
+      color: #6b6b68;
+      max-width: 360px;
+      margin-bottom: 24px;
+    }
+    /* Tall container — one viewport per project */
+    .timeline-sticky-wrap {
+      position: relative;
+      height: calc(6 * 100vh);
+    }
+    /* Sticky viewport pinned while scrolling */
+    .timeline-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: #fff;
+    }
+    /* Each project: stacked absolutely, full viewport */
+    .timeline-entry {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: 1fr 460px;
+      align-items: center;
+      gap: 80px;
+      padding: 0 100px 0 100px;
+      opacity: 0;
+      pointer-events: none;
+      will-change: opacity, transform;
+      text-decoration: none;
+      color: inherit;
+    }
+    .timeline-entry.tl-active { pointer-events: auto; }
+    .timeline-num {
+      font-size: 13px;
+      font-variation-settings: 'wght' 500;
+      color: #aaa;
+      letter-spacing: 0.08em;
+      margin-bottom: 18px;
+    }
+    .timeline-entry-name {
+      font-size: 60px;
+      font-variation-settings: 'wght' 660;
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+    .timeline-entry-sub {
+      font-size: 18px;
+      font-variation-settings: 'wght' 400;
+      color: #6b6b68;
+      line-height: 1.65;
+      margin-bottom: 28px;
+      max-width: 540px;
+    }
+    .timeline-entry-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .timeline-entry-img {
+      width: 100%;
+      height: 360px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #f0efe9;
+    }
+    .timeline-entry-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* Progress dots */
+    .tl-progress {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .tl-pdot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #d0cfc9;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .tl-pdot.active {
+      background: #7dd3fc;
+      transform: scale(1.5);
+    }
+    .project-tag {
+      display: inline-block;
+      font-size: 14px;
+      font-variation-settings: 'wght' 500;
+      color: #0ea5e9;
+      background: #e0f2fe;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-right: 4px;
+      margin-bottom: 4px;
+    }
+
+    /* ── About / Team section ── */
+    .about-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 540px;
+    }
+    .about-photo {
+      overflow: hidden;
+      background: #e8e7e3;
+      position: relative;
+    }
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      filter: grayscale(15%);
+      transition: filter 0.4s;
+    }
+    .about-photo:hover img { filter: grayscale(0%); }
+    .about-content {
+      padding: 64px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-left: 1px solid #e8e7e3;
+    }
+    .about-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-variation-settings: 'wght' 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      background: #7dd3fc;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+      align-self: flex-start;
+    }
+    .about-name {
+      font-size: clamp(32px, 4vw, 52px);
+      font-variation-settings: 'wght' 700;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 8px;
+    }
+    .about-title {
+      font-size: 20px;
+      font-variation-settings: 'wght' 400;
+      color: #6b6b68;
+      margin-bottom: 32px;
+    }
+    .about-bio {
+      font-size: 20px;
+      font-variation-settings: 'wght' 400;
+      line-height: 1.75;
+      color: #3a3936;
+      margin-bottom: 40px;
+    }
+
+    /* ── Quote section ── */
+    .quote-section {
+      padding: 100px 40px;
+      border-top: 1px solid #e8e7e3;
+      border-bottom: 1px solid #e8e7e3;
+    }
+    .quote-section p {
+      font-size: clamp(28px, 4vw, 52px);
+      font-variation-settings: 'wght' 600;
+      letter-spacing: -0.035em;
+      line-height: 1.2;
+      max-width: 900px;
+    }
+    .quote-section em {
+      font-style: normal;
+      color: #7dd3fc;
+    }
+
+    /* ── Experience / Trust section ── */
+    .trust-section {
+      padding: 80px 40px;
+      border-bottom: 1px solid #e8e7e3;
+    }
+    .trust-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 64px;
+    }
+    .trust-header h2 {
+      font-size: clamp(22px, 2.5vw, 32px);
+      font-variation-settings: 'wght' 650;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+    .trust-header p {
+      font-size: 20px;
+      font-variation-settings: 'wght' 400;
+      line-height: 1.7;
+      color: #6b6b68;
+      padding-top: 8px;
+    }
+    .experience-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid #e8e7e3;
+    }
+    .exp-item {
+      padding: 32px 0 32px;
+      border-right: 1px solid #e8e7e3;
+      padding-right: 40px;
+    }
+    .exp-item:first-child { padding-left: 0; }
+    .exp-item:last-child { border-right: none; padding-right: 0; padding-left: 40px; }
+    .exp-item:nth-child(2) { padding-left: 40px; }
+    .exp-company {
+      font-size: 22px;
+      font-variation-settings: 'wght' 650;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .exp-role {
+      font-size: 16px;
+      font-variation-settings: 'wght' 400;
+      color: #6b6b68;
+      margin-bottom: 12px;
+    }
+    .exp-detail {
+      font-size: 18px;
+      font-variation-settings: 'wght' 400;
+      color: #3a3936;
+      line-height: 1.65;
+    }
+
+    /* ── Process section ── */
+    .process-section {
+      padding: 80px 40px;
+      border-bottom: 1px solid #e8e7e3;
+    }
+    .process-top {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 40px;
+      margin-bottom: 64px;
+    }
+    .process-top p {
+      font-size: 20px;
+      font-variation-settings: 'wght' 400;
+      line-height: 1.7;
+      color: #6b6b68;
+    }
+    .process-steps {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border-top: 1px solid #e8e7e3;
+    }
+    .process-step {
+      flex: 1;
+      padding: 36px 0;
+      border-right: 1px solid #e8e7e3;
+      padding-right: 32px;
+    }
+    .process-step:last-child { border-right: none; padding-right: 0; padding-left: 32px; }
+    .process-step:first-child { padding-left: 0; }
+    .process-step:nth-child(2) { padding-left: 32px; }
+    .process-step-num {
+      font-size: 11px;
+      font-variation-settings: 'wght' 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #6b6b68;
+      margin-bottom: 12px;
+    }
+    .process-step-name {
+      font-size: clamp(20px, 2.5vw, 30px);
+      font-variation-settings: 'wght' 650;
+      letter-spacing: -0.03em;
+      color: #1a1918;
+    }
+    .process-step-desc {
+      font-size: 18px;
+      font-variation-settings: 'wght' 400;
+      color: #6b6b68;
+      line-height: 1.6;
+      margin-top: 10px;
+    }
+
+    /* ── Contact CTA ── */
+    .contact-section {
+      padding: 100px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e8e7e3;
+    }
+    .contact-section h2 {
+      font-size: clamp(28px, 4vw, 52px);
+      font-variation-settings: 'wght' 650;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+    }
+    .contact-section h2 span {
+      display: block;
+      color: #cdd5fa;
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 40px 40px 0;
+      border-top: 1px solid #e8e7e3;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 60px;
+    }
+    .footer-top p {
+      font-size: 18px;
+      font-variation-settings: 'wght' 400;
+      color: #6b6b68;
+      line-height: 1.6;
+      max-width: 280px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-links a {
+      font-size: 18px;
+      font-variation-settings: 'wght' 520;
+      color: #1a1918;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: #7dd3fc; }
+    .footer-big {
+      font-size: clamp(48px, 10.5vw, 160px);
+      font-variation-settings: 'wght' 800;
+      letter-spacing: -0.05em;
+      line-height: 0.85;
+      color: #1a1918;
+      overflow: hidden;
+      white-space: nowrap;
+      border-top: 1px solid #e8e7e3;
+      padding-top: 16px;
+      padding-bottom: 20px;
+    }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 0 32px;
+      border-top: 1px solid #e8e7e3;
+    }
+    .footer-bottom span {
+      font-size: 12px;
+      font-variation-settings: 'wght' 400;
+      color: #6b6b68;
+    }
+
+    /* ── Scroll-triggered nav ── */
+    .scroll-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 32px;
+      background: transparent;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+                  opacity 0.35s ease;
+      pointer-events: none;
+    }
+    .scroll-nav.visible {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .scroll-nav-logo img {
+      height: 54px;
+      width: 54px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.2s;
+    }
+    .scroll-nav-logo:hover img { transform: scale(1.08); }
+    .scroll-nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    /* Links slide in from the right of the hamburger */
+    .scroll-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      max-width: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-width 0.45s cubic-bezier(0.25,0.46,0.45,0.94),
+                  opacity 0.3s ease;
+      white-space: nowrap;
+    }
+    .scroll-nav-links.open {
+      max-width: 360px;
+      opacity: 1;
+    }
+    .scroll-nav-links a {
+      font-size: 16px;
+      font-variation-settings: 'wght' 450;
+      color: #1a1918;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      position: relative;
+    }
+    .scroll-nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 1px;
+      background: #1a1918;
+      transition: width 0.25s ease;
+    }
+    .scroll-nav-links a:hover::after { width: 100%; }
+    /* Hamburger button */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 7px;
+      background: none;
+      border: 2px solid #1a1918;
+      border-radius: 50%;
+      cursor: pointer;
+      padding: 12px;
+      margin-left: 24px;
+      width: 56px;
+      height: 56px;
+      align-items: center;
+      flex-shrink: 0;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .hamburger span {
+      display: block;
+      width: 33px;
+      height: 3px;
+      background: #1a1918;
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.2s ease;
+      transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.up { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── Highlight chip ── */
+    .chip {
+      display: inline-block;
+      font-size: 11px;
+      font-variation-settings: 'wght' 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #1a1918;
+      background: #cdd5fa;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ──────────────────────────────────────── NAV -->
+  <!-- ──────────────────────────────────────── HERO -->
+  <section class="hero" id="top">
+    <div class="hero-name-outer">
+      <h1 class="hero-name">Nathaniel Fedida</h1>
+    </div>
+    <div class="hero-body">
+      <p class="hero-bio">
+        Software engineer and product designer at CSULB — building intelligent,
+        human-centered systems at the intersection of machine learning,
+        data science, and thoughtful interface design.
+      </p>
+      <div class="hero-bottom-row">
+        <a href="https://www.linkedin.com/in/nathaniel-fedida/" target="_blank" class="btn-cta">
+          Get in touch
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <nav class="hero-nav">
+          <a href="#top" class="active">Welcome</a>
+          <a href="#work">Projects</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ──────────────────────────────────────── SERVICES -->
+  <section class="services-section">
+    <div class="services-col">
+      <h2 class="services-heading">Product</h2>
+      <ul class="services-list">
+        <li>Product Design</li>
+        <li>Research &amp; Prototyping</li>
+        <li>Consumer Facing</li>
+        <li>User Experience</li>
+        <li>Technical Roadmapping</li>
+      </ul>
+    </div>
+    <div class="services-col">
+      <h2 class="services-heading">Engineering</h2>
+      <ul class="services-list">
+        <li>Machine Learning &amp; AI</li>
+        <li>Full-Stack Development</li>
+        <li>Data Science &amp; Analytics</li>
+        <li>Large Language Models</li>
+        <li>AI Integration</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────── MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="marquee-item">
+        Nathaniel Fedida
+        <span class="marquee-dot"></span>
+        AI Specialist
+        <span class="marquee-dot"></span>
+        ML Engineer
+        <span class="marquee-dot"></span>
+        Product Developer
+        <span class="marquee-dot"></span>
+        &nbsp;
+      </span>
+      <span class="marquee-item" aria-hidden="true">
+        Nathaniel Fedida
+        <span class="marquee-dot"></span>
+        AI Specialist
+        <span class="marquee-dot"></span>
+        ML Engineer
+        <span class="marquee-dot"></span>
+        Product Developer
+        <span class="marquee-dot"></span>
+        &nbsp;
+      </span>
+    </div>
+  </div>
+
+  <!-- ──────────────────────────────────────── WORK INTRO -->
+  <!-- ──────────────────────────────────────── PROJECT TIMELINE -->
+  <section class="timeline-section" id="work" style="scroll-margin-top:64px;">
+    <div class="timeline-header">
+      <div class="reveal">
+        <div class="section-label">Selected Work</div>
+        <h2>Intelligent products<br>and thoughtful experiences</h2>
+      </div>
+      <div class="timeline-header-right reveal reveal-delay-2">
+        <p>
+          Each project combines rigorous engineering with considered design—
+          from ML pipelines serving millions of users to interfaces that people
+          actually enjoy using.
+        </p>
+        <a href="https://github.com/nfedida" target="_blank" class="btn-outline">
+          View all on GitHub
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+            <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="timeline-sticky-wrap" id="timelineStickyWrap">
+      <div class="timeline-sticky">
+
+        <!-- 01 Amazon ML -->
+        <a class="timeline-entry" href="https://github.com/SamuelLin213/BTTAI-Amazon-Team-B" target="_blank">
+          <div class="timeline-entry-text">
+            <div class="timeline-num">01 — 06</div>
+            <div class="timeline-entry-name">Amazon — ML Inference</div>
+            <div class="timeline-entry-sub">Deployed low-latency ML inference pipelines on Amazon Advertising's Sponsored Products platform, improving relevance for 800M+ daily impressions.</div>
+            <div class="timeline-entry-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">AWS</span>
+              <span class="project-tag">Machine Learning</span>
+            </div>
+          </div>
+          <div class="timeline-entry-img">
+            <img src="assets/amazon.png" alt="Amazon ML Inference" loading="lazy" />
+          </div>
+        </a>
+
+        <!-- 02 DDA -->
+        <a class="timeline-entry" href="https://github.com/ViniciusDugue/Generative_Agents" target="_blank">
+          <div class="timeline-entry-text">
+            <div class="timeline-num">02 — 06</div>
+            <div class="timeline-entry-name">Dynamic Digital Agents</div>
+            <div class="timeline-entry-sub">Multi-agent AI system that dynamically selects and orchestrates specialized agents to solve complex multi-step tasks with tool use and memory.</div>
+            <div class="timeline-entry-tags">
+              <span class="project-tag">LLM</span>
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Multi-Agent</span>
+            </div>
+          </div>
+          <div class="timeline-entry-img">
+            <img src="assets/dda.png" alt="Dynamic Digital Agents" loading="lazy" />
+          </div>
+        </a>
+
+        <!-- 03 CSULB Calendar -->
+        <a class="timeline-entry" href="https://github.com/hunterDRuebsamen/CSULB_Calendar" target="_blank">
+          <div class="timeline-entry-text">
+            <div class="timeline-num">03 — 06</div>
+            <div class="timeline-entry-name">CSULB Academic Calendar</div>
+            <div class="timeline-entry-sub">Full-stack scheduling platform serving CSULB students—course planning, deadline tracking, and smart reminders with a clean, accessible interface.</div>
+            <div class="timeline-entry-tags">
+              <span class="project-tag">React</span>
+              <span class="project-tag">Node.js</span>
+              <span class="project-tag">Full-Stack</span>
+            </div>
+          </div>
+          <div class="timeline-entry-img">
+            <img src="assets/csulb.jpg" alt="CSULB Academic Calendar" loading="lazy" />
+          </div>
+        </a>
+
+        <!-- 04 FCB Hackathon -->
+        <a class="timeline-entry" href="https://github.com/natefedidadev/FCB-Pressure-Cooker" target="_blank">
+          <div class="timeline-entry-text">
+            <div class="timeline-num">04 — 06</div>
+            <div class="timeline-entry-name">FC Barcelona "More than a Hack"</div>
+            <div class="timeline-entry-sub">Selected amongst 3500 global applicants to develop a tactical solution for the world's biggest soccer club. Presented project in Barcelona as a finalist.</div>
+            <div class="timeline-entry-tags">
+              <span class="project-tag">React</span>
+              <span class="project-tag">AI/ML</span>
+              <span class="project-tag">Winner</span>
+            </div>
+          </div>
+          <div class="timeline-entry-img">
+            <img src="assets/fcbhackathon.jpg" alt="FCB Hackathon" loading="lazy" />
+          </div>
+        </a>
+
+        <!-- 05 Eye Tracking -->
+        <a class="timeline-entry" href="#" target="_blank">
+          <div class="timeline-entry-text">
+            <div class="timeline-num">05 — 06</div>
+            <div class="timeline-entry-name">Research Engineer @ D2 Laboratories</div>
+            <div class="timeline-entry-sub">Built from the ground up an eye tracking research platform for CSULB's top researchers. Through this, I successfully replaced an expensive research procedure with a nearly free workflow.</div>
+            <div class="timeline-entry-tags">
+              <span class="project-tag">Computer Vision</span>
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Research</span>
+            </div>
+          </div>
+          <div class="timeline-entry-img">
+            <img src="assets/eyetracking.png" alt="Eye Tracking Research" loading="lazy" />
+          </div>
+        </a>
+
+        <!-- 06 Kaggle -->
+        <a class="timeline-entry" href="https://github.com/natefedidadev/Kaggle-NYBG" target="_blank">
+          <div class="timeline-entry-text">
+            <div class="timeline-num">06 — 06</div>
+            <div class="timeline-entry-name">Kaggle — NYBG Plant ID</div>
+            <div class="timeline-entry-sub">Computer vision model for fine-grained herbarium plant species identification. Top-percentile finish in the New York Botanical Garden Kaggle competition.</div>
+            <div class="timeline-entry-tags">
+              <span class="project-tag">PyTorch</span>
+              <span class="project-tag">CNN</span>
+              <span class="project-tag">Computer Vision</span>
+            </div>
+          </div>
+          <div class="timeline-entry-img">
+            <img src="assets/kaggle.png" alt="Kaggle NYBG" loading="lazy" />
+          </div>
+        </a>
+
+        <!-- Progress dots -->
+        <div class="tl-progress" id="tlProgress">
+          <span class="tl-pdot active"></span>
+          <span class="tl-pdot"></span>
+          <span class="tl-pdot"></span>
+          <span class="tl-pdot"></span>
+          <span class="tl-pdot"></span>
+          <span class="tl-pdot"></span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────── ABOUT / TEAM -->
+  <section class="about-section" id="about">
+    <div class="about-photo">
+      <img src="assets/Professional Photo.jpg" alt="Nathaniel Fedida" />
+    </div>
+    <div class="about-content">
+      <div>
+        <span class="about-tag">Based in Long Beach, CA</span>
+        <h2 class="about-name reveal">Nathaniel<br>Fedida</h2>
+        <p class="about-title reveal">Software Engineer · Product Designer · CS @ CSULB</p>
+        <p class="about-bio reveal">
+          I'm a computer science student at Cal State Long Beach with a focus on
+          machine learning and human-computer interaction. I've interned at Amazon
+          building ML infrastructure at scale, competed in national hackathons, and
+          conduct UX research in CSULB's Human Factors Lab.
+          <br><br>
+          I care about the full stack—from model architecture to pixel-perfect
+          interfaces. When a product works well and feels right, that's the goal.
+        </p>
+      </div>
+      <div class="flex gap-3 reveal">
+        <a href="https://www.linkedin.com/in/nathaniel-fedida/" target="_blank" class="btn-cta">
+          Get in touch
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="assets/Nathaniel Fedida - CS.pdf" target="_blank" class="btn-outline">Resume</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────── QUOTE -->
+  <section class="quote-section">
+    <p class="reveal">
+      I combine <em>creativity</em>, strategic thinking and technology to build
+      intelligent systems that <em>contribute to real outcomes</em> — not just
+      impressive demos.
+    </p>
+  </section>
+
+  <!-- ──────────────────────────────────────── EXPERIENCE -->
+  <section class="trust-section">
+    <div class="trust-header">
+      <h2 class="reveal">Experience &amp; recognition<br>that speaks for itself.</h2>
+      <p class="reveal reveal-delay-2">
+        From Fortune 500 internships to competitive research and
+        award-winning hackathon builds—each experience has sharpened
+        how I think about engineering and design.
+      </p>
+    </div>
+    <div class="experience-list">
+      <div class="exp-item reveal">
+        <div class="exp-company">Amazon</div>
+        <div class="exp-role">Software Development Engineer Intern · 2024</div>
+        <div class="exp-detail">Built ML inference pipelines on Sponsored Products—serving 800M+ daily impressions across Amazon Advertising.</div>
+      </div>
+      <div class="exp-item reveal reveal-delay-2">
+        <div class="exp-company">CSULB Human Factors Lab</div>
+        <div class="exp-role">Research Assistant · 2023–present</div>
+        <div class="exp-detail">Eye tracking research studying cognitive load and visual attention patterns to improve UX design methodology.</div>
+      </div>
+      <div class="exp-item reveal reveal-delay-3">
+        <div class="exp-company">FCB Hackathon</div>
+        <div class="exp-role">1st Place Winner · 2023</div>
+        <div class="exp-detail">24-hour competition building a data-driven ad personalization engine. Competed against teams from top engineering programs nationwide.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────── PROCESS -->
+  <section class="process-section" id="process">
+    <div class="process-top">
+      <div class="section-label">How I work</div>
+      <p class="reveal">
+        Step by step, I deliver projects with precision and clear communication—
+        from the first conversation to the final deployment.
+      </p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="process-step-num">01</div>
+        <div class="process-step-name">Discovery</div>
+        <div class="process-step-desc">Understanding the problem, constraints, and users before writing a single line of code.</div>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="process-step-num">02</div>
+        <div class="process-step-name">Research</div>
+        <div class="process-step-desc">Data analysis, competitive review, and technical scoping to surface the right solution.</div>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="process-step-num">03</div>
+        <div class="process-step-name">Design</div>
+        <div class="process-step-desc">Wireframes, prototypes, and visual design—validated with real users before building.</div>
+      </div>
+      <div class="process-step reveal reveal-delay-4">
+        <div class="process-step-num">04</div>
+        <div class="process-step-name">Build</div>
+        <div class="process-step-desc">Clean, tested, production-ready code shipped on schedule with full documentation.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────── CONTACT -->
+  <section class="contact-section" id="contact" style="scroll-margin-top:64px;">
+    <div class="reveal">
+      <div class="section-label" style="margin-bottom: 20px;">Let's connect</div>
+      <h2>
+        I'm one<br>
+        <span>email away.</span>
+      </h2>
+    </div>
+    <div class="reveal reveal-delay-2" style="display:flex;flex-direction:column;align-items:flex-end;gap:16px;">
+      <a href="https://www.linkedin.com/in/nathaniel-fedida/" target="_blank" class="btn-cta" style="font-size:16px;padding:14px 28px;">
+        Connect on LinkedIn
+        <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
+          <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <div class="footer-links">
+        <a href="https://github.com/nfedida" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/nathanielfedida" target="_blank">LinkedIn</a>
+        <a href="assets/Nathaniel Fedida - CS.pdf" target="_blank">Resume</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────── FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <p>
+        Software engineer and product designer.<br>
+        CS @ Cal State Long Beach.
+      </p>
+      <div class="footer-links">
+        <a href="https://github.com/nfedida" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/nathanielfedida" target="_blank">LinkedIn</a>
+        <a href="mailto:natefedidadev@gmail.com">Email</a>
+      </div>
+    </div>
+    <div class="footer-big">Nathaniel Fedida</div>
+    <div class="footer-bottom">
+      <span>© 2026 Nathaniel Fedida</span>
+      <span>Long Beach, CA</span>
+    </div>
+  </footer>
+
+  <!-- ──────────────────────────────────────── SCROLL NAV -->
+  <div class="scroll-nav" id="scrollNav" role="navigation">
+    <a href="#top" class="scroll-nav-logo" aria-label="Back to top">
+      <img src="assets/NJW.png" alt="NF" />
+    </a>
+    <div class="scroll-nav-right">
+      <div class="scroll-nav-links" id="scrollNavLinks">
+        <a href="#top">Welcome</a>
+        <a href="#work">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ──────────────────────────────────────── JS -->
+  <script>
+    // Full-width hero name — uses an off-screen probe to measure true text width
+    function fitHeroName() {
+      const el = document.querySelector('.hero-name');
+      if (!el) return;
+      const probe = document.createElement('span');
+      probe.textContent = el.textContent;
+      probe.style.cssText = [
+        'position:fixed', 'top:-9999px', 'left:-9999px',
+        'visibility:hidden', 'pointer-events:none', 'white-space:nowrap',
+        "font-family:'Bricolage Grotesque',sans-serif",
+        "font-variation-settings:'wght' 790",
+        'letter-spacing:-0.05em', 'font-size:100px',
+      ].join(';');
+      document.body.appendChild(probe);
+      requestAnimationFrame(() => {
+        const textW100 = probe.getBoundingClientRect().width;
+        document.body.removeChild(probe);
+        if (!textW100) return;
+        const available = window.innerWidth - 48; // 24px each side
+        el.style.fontSize = Math.floor(100 * available / textW100) + 'px';
+      });
+    }
+    document.fonts.ready.then(() => requestAnimationFrame(fitHeroName));
+    window.addEventListener('resize', fitHeroName);
+
+    // Sticky scroll project showcase
+    (function() {
+      const wrap = document.getElementById('timelineStickyWrap');
+      const entries = document.querySelectorAll('.timeline-entry');
+      const dots = document.querySelectorAll('.tl-pdot');
+      const N = entries.length;
+      // Non-overlapping: current fully exits before next enters
+      const FI = 0.12; // fade-in fraction
+      const FO = 0.12; // fade-out fraction
+      const VIS = 1 - FI - FO; // fully visible fraction
+
+      function update() {
+        if (!wrap) return;
+        const rect = wrap.getBoundingClientRect();
+        const p = Math.max(0, -rect.top / window.innerHeight);
+
+        entries.forEach((entry, i) => {
+          const rel = p - i;
+          let opacity, ty;
+          if (rel <= 0) {
+            opacity = 0; ty = 70;
+          } else if (rel < FI) {
+            const t = rel / FI;
+            opacity = t; ty = (1 - t) * 70;
+          } else if (rel <= FI + VIS) {
+            opacity = 1; ty = 0;
+          } else if (rel < 1) {
+            const t = (rel - FI - VIS) / FO;
+            opacity = 1 - t; ty = -t * 70;
+          } else {
+            opacity = 0; ty = -70;
+          }
+          entry.style.opacity = Math.max(0, Math.min(1, opacity));
+          entry.style.transform = `translateY(${ty}px)`;
+          entry.classList.toggle('tl-active', opacity > 0.5);
+        });
+
+        const active = Math.min(Math.floor(p + 0.5), N - 1);
+        dots.forEach((d, i) => d.classList.toggle('active', i === active));
+      }
+
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    })();
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('up');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px 100px 0px' });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // Scroll-triggered nav: show after scrolling past the hero
+    const scrollNav  = document.getElementById('scrollNav');
+    const hamburger  = document.getElementById('hamburger');
+    const navLinks   = document.getElementById('scrollNavLinks');
+    const heroHeight = () => document.querySelector('.hero')?.offsetHeight || window.innerHeight;
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > heroHeight() * 0.85) {
+        scrollNav.classList.add('visible');
+      } else {
+        scrollNav.classList.remove('visible');
+        // Auto-close menu when scrolling back to hero
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    }, { passive: true });
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close menu when a nav link is clicked
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Trigger hero reveals + refit name once fonts/layout settle
+    window.addEventListener('load', () => {
+      document.fonts.ready.then(() => requestAnimationFrame(fitHeroName));
+    });
+  </script>
+
+</body>
+</html>
