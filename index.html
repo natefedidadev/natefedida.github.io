@@ -167,7 +167,7 @@
       background: #bae6fd;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      padding: 80px 40px 100px;
+      padding: 48px 40px 64px;
     }
     .services-col {
       padding: 0 40px;
@@ -250,7 +250,7 @@
     .timeline-header {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      padding: 80px 80px 72px;
+      padding: 40px 80px 48px;
       border-bottom: 1px solid #e8e7e3;
     }
     .timeline-header h2 {
@@ -335,12 +335,16 @@
       height: 360px;
       border-radius: 16px;
       overflow: hidden;
-      background: #f0efe9;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
     }
     .timeline-entry-img img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
     }
     /* Progress dots */
@@ -450,6 +454,8 @@
       letter-spacing: -0.035em;
       line-height: 1.2;
       max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
     }
     .quote-section em {
       font-style: normal;
@@ -516,7 +522,6 @@
     /* ── Process section ── */
     .process-section {
       padding: 80px 40px;
-      border-bottom: 1px solid #e8e7e3;
     }
     .process-top {
       display: grid;
@@ -752,6 +757,51 @@
     .reveal-delay-3 { transition-delay: 0.3s; }
     .reveal-delay-4 { transition-delay: 0.4s; }
 
+    /* ── Finale scroll effect ── */
+    .finale-scroll {
+      height: 120vh;
+    }
+    .finale-overlay {
+      position: fixed;
+      inset: 0;
+      background: #fff;
+      z-index: 160;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .finale-inner {
+      text-align: center;
+      padding: 40px;
+    }
+    .finale-label {
+      font-size: 15px;
+      font-variation-settings: 'wght' 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #6b6b68;
+      margin-bottom: 32px;
+    }
+    .finale-heading {
+      font-size: clamp(52px, 7vw, 96px);
+      font-variation-settings: 'wght' 650;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 48px;
+    }
+    .finale-heading span {
+      display: block;
+      color: #cdd5fa;
+    }
+    .finale-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
     /* ── Highlight chip ── */
     .chip {
       display: inline-block;
@@ -776,9 +826,7 @@
     </div>
     <div class="hero-body">
       <p class="hero-bio">
-        Software engineer and product designer at CSULB — building intelligent,
-        human-centered systems at the intersection of machine learning,
-        data science, and thoughtful interface design.
+        Welcome, I'm Nate. A specialist in full-stack software development and AI integration, who is passionate in bringing products to life
       </p>
       <div class="hero-bottom-row">
         <a href="https://www.linkedin.com/in/nathaniel-fedida/" target="_blank" class="btn-cta">
@@ -855,15 +903,14 @@
     <div class="timeline-header">
       <div class="reveal">
         <div class="section-label">Selected Work</div>
-        <h2>Intelligent products<br>and thoughtful experiences</h2>
+        <h2>Intelligent products that have<br>evolved the way I see tech</h2>
       </div>
       <div class="timeline-header-right reveal reveal-delay-2">
         <p>
-          Each project combines rigorous engineering with considered design—
-          from ML pipelines serving millions of users to interfaces that people
-          actually enjoy using.
+          Each project combines engineering with in depth product design—
+          from Machine Learning pipelines serving millions of users to innovative software that uses current AI technologies.
         </p>
-        <a href="https://github.com/nfedida" target="_blank" class="btn-outline">
+        <a href="https://github.com/natefedidadev" target="_blank" class="btn-outline">
           View all on GitHub
           <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
             <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -876,7 +923,7 @@
       <div class="timeline-sticky">
 
         <!-- 01 Amazon ML -->
-        <a class="timeline-entry" href="https://github.com/SamuelLin213/BTTAI-Amazon-Team-B" target="_blank">
+        <div class="timeline-entry">
           <div class="timeline-entry-text">
             <div class="timeline-num">01 — 06</div>
             <div class="timeline-entry-name">AI Fellow @ Amazon</div>
@@ -886,14 +933,18 @@
               <span class="project-tag">Machine Learning</span>
               <span class="project-tag">Product Development</span>
             </div>
+            <a href="https://github.com/SamuelLin213/BTTAI-Amazon-Team-B" target="_blank" class="btn-outline" style="margin-top:24px;font-size:14px;padding:10px 20px;">
+              View on GitHub
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
           </div>
           <div class="timeline-entry-img">
-            <img src="assets/amazon.png" alt="Amazon ML Inference" loading="lazy" />
+            <img src="amazon.png" alt="Amazon" loading="lazy" />
           </div>
-        </a>
+        </div>
 
         <!-- 02 CSULB Calendar -->
-        <a class="timeline-entry" href="https://github.com/hunterDRuebsamen/CSULB_Calendar" target="_blank">
+        <div class="timeline-entry">
           <div class="timeline-entry-text">
             <div class="timeline-num">02 — 06</div>
             <div class="timeline-entry-name">Software Engineer @ CSULB</div>
@@ -904,14 +955,18 @@
               <span class="project-tag">Linux</span>
               <span class="project-tag">Full-Stack</span>
             </div>
+            <a href="https://github.com/hunterDRuebsamen/CSULB_Calendar" target="_blank" class="btn-outline" style="margin-top:24px;font-size:14px;padding:10px 20px;">
+              View on GitHub
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
           </div>
           <div class="timeline-entry-img">
-            <img src="assets/csulb.jpg" alt="CSULB Academic Calendar" loading="lazy" />
+            <img src="lb.png" alt="CSULB" loading="lazy" />
           </div>
-        </a>
+        </div>
 
         <!-- 03 Eye Tracking -->
-        <a class="timeline-entry" href="#" target="_blank">
+        <div class="timeline-entry">
           <div class="timeline-entry-text">
             <div class="timeline-num">03 — 06</div>
             <div class="timeline-entry-name">Research Engineer @ D2 Laboratories</div>
@@ -921,14 +976,17 @@
               <span class="project-tag">Machine Learning</span>
               <span class="project-tag">Research</span>
             </div>
+            <span class="btn-outline" style="margin-top:24px;font-size:14px;padding:10px 20px;opacity:0.45;cursor:default;">
+              Private Repo
+            </span>
           </div>
           <div class="timeline-entry-img">
-            <img src="assets/eyetracking.png" alt="Eye Tracking Research" loading="lazy" />
+            <img src="d2.jpg" alt="D2 Laboratories" loading="lazy" />
           </div>
-        </a>
+        </div>
 
         <!-- 04 DDA -->
-        <a class="timeline-entry" href="https://github.com/ViniciusDugue/Generative_Agents" target="_blank">
+        <div class="timeline-entry">
           <div class="timeline-entry-text">
             <div class="timeline-num">04 — 06</div>
             <div class="timeline-entry-name">Dynamic Digital Agents</div>
@@ -938,14 +996,18 @@
               <span class="project-tag">Agentic AI</span>
               <span class="project-tag">Retrieval Augmented Generation</span>
             </div>
+            <a href="https://github.com/ViniciusDugue/Generative_Agents" target="_blank" class="btn-outline" style="margin-top:24px;font-size:14px;padding:10px 20px;">
+              View on GitHub
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
           </div>
           <div class="timeline-entry-img">
-            <img src="assets/dda.png" alt="Dynamic Digital Agents" loading="lazy" />
+            <img src="dynamicagentslogo.png" alt="Dynamic Digital Agents" loading="lazy" />
           </div>
-        </a>
+        </div>
 
         <!-- 05 FCB Hackathon -->
-        <a class="timeline-entry" href="https://github.com/natefedidadev/FCB-Pressure-Cooker" target="_blank">
+        <div class="timeline-entry">
           <div class="timeline-entry-text">
             <div class="timeline-num">05 — 06</div>
             <div class="timeline-entry-name">FC Barcelona "More than a Hack"</div>
@@ -956,14 +1018,18 @@
               <span class="project-tag">Data Engineering</span>
               <span class="project-tag">Python</span>
             </div>
+            <a href="https://github.com/natefedidadev/FCB-Pressure-Cooker" target="_blank" class="btn-outline" style="margin-top:24px;font-size:14px;padding:10px 20px;">
+              View on GitHub
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
           </div>
           <div class="timeline-entry-img">
-            <img src="assets/fcbhackathon.jpg" alt="FCB Hackathon" loading="lazy" />
+            <img src="fcbarc.jpg" alt="FC Barcelona" loading="lazy" />
           </div>
-        </a>
+        </div>
 
         <!-- 06 Kaggle -->
-        <a class="timeline-entry" href="https://github.com/natefedidadev/Kaggle-NYBG" target="_blank">
+        <div class="timeline-entry">
           <div class="timeline-entry-text">
             <div class="timeline-num">06 — 06</div>
             <div class="timeline-entry-name">NYBG Kaggle Competition</div>
@@ -974,11 +1040,15 @@
               <span class="project-tag">Image Classification</span>
               <span class="project-tag">Computer Vision</span>
             </div>
+            <a href="https://github.com/natefedidadev/Kaggle-NYBG" target="_blank" class="btn-outline" style="margin-top:24px;font-size:14px;padding:10px 20px;">
+              View on GitHub
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
           </div>
           <div class="timeline-entry-img">
-            <img src="assets/kaggle.png" alt="Kaggle NYBG" loading="lazy" />
+            <img src="nybg.png" alt="NYBG Kaggle" loading="lazy" />
           </div>
-        </a>
+        </div>
 
         <!-- Progress dots -->
         <div class="tl-progress" id="tlProgress">
@@ -994,137 +1064,49 @@
     </div>
   </section>
 
-  <!-- ──────────────────────────────────────── ABOUT / TEAM -->
-  <section class="about-section" id="about">
-    <div class="about-photo">
-      <img src="assets/Professional Photo.jpg" alt="Nathaniel Fedida" />
-    </div>
-    <div class="about-content">
-      <div>
-        <span class="about-tag">Based in Long Beach, CA</span>
-        <h2 class="about-name reveal">Nathaniel<br>Fedida</h2>
-        <p class="about-title reveal">Software Engineer · Product Management · Innovation</p>
-        <p class="about-bio reveal">
-          Welcome, thanks for stopping by! I'm Nate. A technically driven innovator who loves collaborating with people to develop impactful products.
-          <br><br>
-          I care about the full product development lifecycle. When a product works well and feels right, that's the goal.
-        </p>
-      </div>
-      <div class="flex gap-3 reveal">
-        <a href="https://www.linkedin.com/in/nathaniel-fedida/" target="_blank" class="btn-cta">
-          Get in touch
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <a href="assets/Nathaniel Fedida - CS.pdf" target="_blank" class="btn-outline">Resume</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ──────────────────────────────────────── QUOTE -->
+  <!-- ──────────────────────────────────────── QUOTE + EXPERIENCE -->
   <section class="quote-section">
     <p class="reveal">
-      I combine <em>creativity</em>, strategic thinking and technology to build
-      intelligent systems that <em>contribute to real outcomes</em> — not just
-      impressive demos.
+      I combine <em>creativity</em> with strategic thinking and technology to build
+      innovative systems that <em>contribute to real life goals.</em>
     </p>
-  </section>
-
-  <!-- ──────────────────────────────────────── EXPERIENCE -->
-  <section class="trust-section">
-    <div class="trust-header">
+    <div class="trust-header" style="margin-top: 160px; margin-bottom: 0; padding: 0 120px;">
       <h2 class="reveal">Experience &amp; recognition<br>that speaks for itself.</h2>
       <p class="reveal reveal-delay-2">
         From Fortune 500 internships to competitive research and
-        award-winning hackathon builds—each experience has sharpened
-        how I think about engineering and design.
+        award winning hackathon builds—each experience has sharpened my outlook on how products should be made.
       </p>
-    </div>
-    <div class="experience-list">
-      <div class="exp-item reveal">
-        <div class="exp-company">Amazon</div>
-        <div class="exp-role">Software Development Engineer Intern · 2024</div>
-        <div class="exp-detail">Built ML inference pipelines on Sponsored Products—serving 800M+ daily impressions across Amazon Advertising.</div>
-      </div>
-      <div class="exp-item reveal reveal-delay-2">
-        <div class="exp-company">CSULB Human Factors Lab</div>
-        <div class="exp-role">Research Assistant · 2023–present</div>
-        <div class="exp-detail">Eye tracking research studying cognitive load and visual attention patterns to improve UX design methodology.</div>
-      </div>
-      <div class="exp-item reveal reveal-delay-3">
-        <div class="exp-company">FCB Hackathon</div>
-        <div class="exp-role">1st Place Winner · 2023</div>
-        <div class="exp-detail">24-hour competition building a data-driven ad personalization engine. Competed against teams from top engineering programs nationwide.</div>
-      </div>
     </div>
   </section>
 
-  <!-- ──────────────────────────────────────── PROCESS -->
-  <section class="process-section" id="process">
-    <div class="process-top">
-      <div class="section-label">How I work</div>
-      <p class="reveal">
-        Step by step, I deliver projects with precision and clear communication—
-        from the first conversation to the final deployment.
-      </p>
-    </div>
-    <div class="process-steps">
-      <div class="process-step reveal">
-        <div class="process-step-num">01</div>
-        <div class="process-step-name">Discovery</div>
-        <div class="process-step-desc">Understanding the problem, constraints, and users before writing a single line of code.</div>
-      </div>
-      <div class="process-step reveal reveal-delay-2">
-        <div class="process-step-num">02</div>
-        <div class="process-step-name">Research</div>
-        <div class="process-step-desc">Data analysis, competitive review, and technical scoping to surface the right solution.</div>
-      </div>
-      <div class="process-step reveal reveal-delay-3">
-        <div class="process-step-num">03</div>
-        <div class="process-step-name">Design</div>
-        <div class="process-step-desc">Wireframes, prototypes, and visual design—validated with real users before building.</div>
-      </div>
-      <div class="process-step reveal reveal-delay-4">
-        <div class="process-step-num">04</div>
-        <div class="process-step-name">Build</div>
-        <div class="process-step-desc">Clean, tested, production-ready code shipped on schedule with full documentation.</div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ──────────────────────────────────────── CONTACT -->
-  <section class="contact-section" id="contact" style="scroll-margin-top:64px;">
-    <div class="reveal">
-      <div class="section-label" style="margin-bottom: 20px;">Let's connect</div>
-      <h2>
-        I'm one<br>
-        <span>email away.</span>
+
+
+  <!-- ──────────────────────────────────────── FINALE -->
+  <div class="finale-scroll" id="contact" style="scroll-margin-top:64px;"></div>
+
+  <div class="finale-overlay" id="finaleOverlay">
+    <div class="finale-inner" id="finaleInner">
+      <div class="finale-label">Let's connect</div>
+      <h2 class="finale-heading">
+        I'm one<br><span>email away.</span>
       </h2>
-    </div>
-    <div class="reveal reveal-delay-2" style="display:flex;flex-direction:column;align-items:flex-end;gap:16px;">
-      <a href="https://www.linkedin.com/in/nathaniel-fedida/" target="_blank" class="btn-cta" style="font-size:16px;padding:14px 28px;">
-        Connect on LinkedIn
-        <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
-          <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-      <div class="footer-links">
-        <a href="https://github.com/nfedida" target="_blank">GitHub</a>
-        <a href="https://linkedin.com/in/nathanielfedida" target="_blank">LinkedIn</a>
-        <a href="assets/Nathaniel Fedida - CS.pdf" target="_blank">Resume</a>
-        <a href="mailto:natefedidadev@gmail.com">Email</a>
+      <div class="finale-actions">
+        <a href="https://www.linkedin.com/in/nathaniel-fedida/" target="_blank" class="btn-cta">
+          Connect on LinkedIn
+          <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
+            <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <div class="footer-links" style="justify-content:center;">
+          <a href="https://github.com/natefedidadev" target="_blank">GitHub</a>
+          <a href="https://www.linkedin.com/in/nathaniel-fedida/" target="_blank">LinkedIn</a>
+          <a href="assets/Nathaniel Fedida - CS.pdf" target="_blank">Resume</a>
+          <a href="mailto:natefedidadev@gmail.com">Email</a>
+        </div>
       </div>
     </div>
-  </section>
-
-  <!-- ──────────────────────────────────────── FOOTER -->
-  <footer>
-    <div class="footer-bottom">
-      <span>© 2026 Nathaniel Fedida</span>
-      <span>Long Beach, CA</span>
-    </div>
-  </footer>
+  </div>
 
   <!-- ──────────────────────────────────────── SCROLL NAV -->
   <div class="scroll-nav" id="scrollNav" role="navigation">
@@ -1262,10 +1244,46 @@
       });
     });
 
+    // Contact links: scroll to the bottom of the finale div so transition is fully triggered
+    document.querySelectorAll('a[href="#contact"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const finale = document.getElementById('contact');
+        const target = finale.offsetTop + finale.offsetHeight - window.innerHeight;
+        window.scrollTo({ top: target, behavior: 'smooth' });
+      });
+    });
+
     // Trigger hero reveals + refit name once fonts/layout settle
     window.addEventListener('load', () => {
       document.fonts.ready.then(() => requestAnimationFrame(fitHeroName));
     });
+
+    // Finale scroll effect
+    (function() {
+      const finaleScroll  = document.getElementById('contact');
+      const finaleOverlay = document.getElementById('finaleOverlay');
+      const finaleInner   = document.getElementById('finaleInner');
+
+      function updateFinale() {
+        const rect = finaleScroll.getBoundingClientRect();
+        // scrollable = how far we can actually scroll through the div
+        const scrollable = finaleScroll.offsetHeight - window.innerHeight;
+        const p = Math.max(0, Math.min(1, -rect.top / scrollable));
+
+        // Overlay covers quickly — reaches full white by p=0.6
+        finaleOverlay.style.opacity = Math.min(1, p / 0.6);
+        finaleOverlay.style.pointerEvents = p > 0.3 ? 'auto' : 'none';
+
+        // Content starts appearing at p=0.15, fully visible at p=0.85
+        const cp = Math.max(0, Math.min(1, (p - 0.15) / 0.7));
+        finaleInner.style.opacity = cp;
+        finaleInner.style.transform = `translateY(${(1 - cp) * 50}px) scale(${0.92 + cp * 0.12})`;
+      }
+
+      window.addEventListener('scroll', updateFinale, { passive: true });
+      updateFinale();
+    })();
   </script>
 
 </body>
