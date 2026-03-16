@@ -34,10 +34,10 @@
   </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; background: #fff; }
     body {
       font-family: 'Bricolage Grotesque', sans-serif;
-      background: #fff;
+      background: transparent;
       color: #1a1918;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -57,6 +57,15 @@
       min-height: 57vh;
       display: flex;
       flex-direction: column;
+      position: relative;
+    }
+    .hero-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
     }
     .hero-name-outer {
       padding: 48px 0 0;
@@ -65,7 +74,8 @@
     }
     .hero-name {
       white-space: nowrap;
-      font-variation-settings: 'wght' 790;
+      font-optical-sizing: none;
+      font-variation-settings: 'opsz' 72, 'wght' 790;
       letter-spacing: -0.05em;
       line-height: 0.88;
       display: block;
@@ -201,7 +211,6 @@
       border-top: 1px solid #e8e7e3;
       border-bottom: 1px solid #e8e7e3;
       padding: 12px 0;
-      background: #fff;
     }
     .marquee-track {
       display: flex;
@@ -285,7 +294,6 @@
       top: 0;
       height: 100vh;
       overflow: hidden;
-      background: #fff;
     }
     /* Each project: stacked absolutely, full viewport */
     .timeline-entry {
@@ -814,10 +822,126 @@
       padding: 3px 10px;
       border-radius: 100px;
     }
+
+    /* ── Mobile hero fade-in animation ── */
+    @keyframes hero-fade-up {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Mobile (≤ 768px) ── */
+    @media (max-width: 768px) {
+      /* Hero — full viewport, stacked centered name */
+      .hero {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 18vh;
+        padding-bottom: 100px; /* space for absolute bottom row */
+      }
+      .hero-name-outer {
+        flex: 0;
+        display: block;
+        padding: 0;
+        overflow: hidden;
+        margin-bottom: 80px;
+      }
+      .hero-name {
+        padding: 0;
+        animation: hero-fade-up 0.9s ease 0.15s both;
+      }
+      .hero-body {
+        flex: 0;
+        padding: 0 24px;
+        gap: 0;
+        justify-content: flex-start;
+      }
+      .hero-bio {
+        font-size: 17px;
+        margin-bottom: 0;
+        max-width: 100%;
+        animation: hero-fade-up 0.9s ease 0.4s both;
+      }
+      .hero-bottom-row {
+        position: absolute;
+        bottom: 32px;
+        left: 20px;
+        right: 20px;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+        animation: hero-fade-up 0.9s ease 0.55s both;
+      }
+      .hero-nav { gap: 12px; padding-bottom: 0; flex-shrink: 1; }
+      .hero-nav a { font-size: 14px; }
+      .btn-cta { font-size: 14px; padding: 11px 18px; white-space: nowrap; flex-shrink: 0; }
+
+      /* Services */
+      .services-section { grid-template-columns: 1fr 1fr; padding: 28px 16px 36px; gap: 0 12px; }
+      .services-col { padding: 0; }
+      .services-col + .services-col { margin-top: 0; }
+      .services-heading { font-size: 18px; margin-bottom: 12px; }
+      .services-list li { font-size: 14px; padding: 8px 0; }
+
+      /* Marquee */
+      .marquee-item { font-size: 40px; padding-right: 20px; }
+      .marquee-dot { margin: 0 14px; }
+
+      /* Timeline header */
+      .timeline-header { grid-template-columns: 1fr; padding: 24px 20px 20px; }
+      .timeline-header h2 { font-size: 26px; max-width: 100%; }
+      .timeline-header-right { padding-left: 0; margin-top: 16px; }
+      .timeline-header-right p { max-width: 100%; }
+
+      /* Timeline entries */
+      .timeline-entry {
+        grid-template-columns: 1fr;
+        padding: 24px 20px 64px;
+        gap: 20px;
+        align-items: center;
+        align-content: center;
+        overflow-y: auto;
+      }
+      .timeline-entry-name { font-size: 30px; margin-bottom: 10px; }
+      .timeline-entry-sub { font-size: 14px; margin-bottom: 14px; }
+      .timeline-entry-img { height: 180px; padding: 20px; }
+      .timeline-num { margin-bottom: 10px; }
+      .tl-progress { bottom: 18px; }
+
+      /* Quote section */
+      .quote-section { padding: 56px 20px; }
+      .quote-section p { font-size: clamp(22px, 5.5vw, 36px); }
+
+      /* Trust header — override inline styles */
+      .trust-header {
+        grid-template-columns: 1fr !important;
+        padding: 0 !important;
+        gap: 16px;
+        margin-top: 48px !important;
+      }
+      .trust-header h2 { font-size: clamp(20px, 5vw, 28px); }
+      .trust-header p { font-size: 16px; }
+
+      /* Footer links */
+      .footer-links { flex-wrap: wrap; gap: 16px; }
+
+      /* Finale */
+      .finale-inner { padding: 24px 20px; }
+      .finale-heading { font-size: clamp(34px, 9vw, 56px); margin-bottom: 28px; }
+      .finale-label { margin-bottom: 16px; }
+      .finale-actions .btn-cta { font-size: 16px; padding: 14px 24px; }
+
+      /* Scroll nav */
+      .scroll-nav { padding: 16px 20px; }
+      .scroll-nav-logo img { height: 42px; width: 42px; }
+    }
   </style>
 </head>
 <body>
 
+  <canvas class="hero-canvas" id="heroParticles"></canvas>
   <!-- ──────────────────────────────────────── NAV -->
   <!-- ──────────────────────────────────────── HERO -->
   <section class="hero" id="top">
@@ -826,7 +950,7 @@
     </div>
     <div class="hero-body">
       <p class="hero-bio">
-        Welcome, I'm Nate. A specialist in full-stack software development and AI integration, who is passionate in bringing products to life
+        Welcome to my site! I'm a specialist in full-stack software development and AI integration, and my passion lies in bringing products to life
       </p>
       <div class="hero-bottom-row">
         <a href="https://www.linkedin.com/in/nathaniel-fedida/" target="_blank" class="btn-cta">
@@ -902,7 +1026,7 @@
   <section class="timeline-section" id="work" style="scroll-margin-top:64px;">
     <div class="timeline-header">
       <div class="reveal">
-        <div class="section-label">Selected Work</div>
+        <div class="section-label">Projects & Experience</div>
         <h2>Intelligent products that have<br>evolved the way I see tech</h2>
       </div>
       <div class="timeline-header-right reveal reveal-delay-2">
@@ -1133,22 +1257,26 @@
     function fitHeroName() {
       const el = document.querySelector('.hero-name');
       if (!el) return;
-      const probe = document.createElement('span');
-      probe.textContent = el.textContent;
-      probe.style.cssText = [
-        'position:fixed', 'top:-9999px', 'left:-9999px',
-        'visibility:hidden', 'pointer-events:none', 'white-space:nowrap',
-        "font-family:'Bricolage Grotesque',sans-serif",
-        "font-variation-settings:'wght' 790",
-        'letter-spacing:-0.05em', 'font-size:100px',
-      ].join(';');
-      document.body.appendChild(probe);
-      requestAnimationFrame(() => {
-        const textW100 = probe.getBoundingClientRect().width;
-        document.body.removeChild(probe);
-        if (!textW100) return;
-        const available = window.innerWidth - 48; // 24px each side
-        el.style.fontSize = Math.floor(100 * available / textW100) + 'px';
+      // Ensure the exact font variant is loaded before measuring
+      document.fonts.load("790 100px 'Bricolage Grotesque'").then(() => {
+        const probe = document.createElement('span');
+        probe.textContent = el.textContent;
+        probe.style.cssText = [
+          'position:fixed', 'top:-9999px', 'left:-9999px',
+          'visibility:hidden', 'pointer-events:none', 'white-space:nowrap',
+          "font-family:'Bricolage Grotesque',sans-serif",
+          'font-optical-sizing:none',
+          "font-variation-settings:'opsz' 72,'wght' 790",
+          'letter-spacing:-0.05em', 'font-size:100px',
+        ].join(';');
+        document.body.appendChild(probe);
+        requestAnimationFrame(() => {
+          const textW100 = probe.getBoundingClientRect().width;
+          document.body.removeChild(probe);
+          if (!textW100) return;
+          const available = window.innerWidth <= 768 ? window.innerWidth : window.innerWidth - 48;
+          el.style.fontSize = Math.floor(100 * available / textW100) + 'px';
+        });
       });
     }
     document.fonts.ready.then(() => requestAnimationFrame(fitHeroName));
@@ -1161,8 +1289,8 @@
       const dots = document.querySelectorAll('.tl-pdot');
       const N = entries.length;
       // Non-overlapping: current fully exits before next enters
-      const FI = 0.12; // fade-in fraction
-      const FO = 0.12; // fade-out fraction
+      const FI = 0.10; // fade-in fraction
+      const FO = 0.10; // fade-out fraction
       const VIS = 1 - FI - FO; // fully visible fraction
 
       function update() {
@@ -1197,6 +1325,27 @@
 
       window.addEventListener('scroll', update, { passive: true });
       update();
+
+      // Only snap when user stops mid-fade (partial opacity visible).
+      // Never snap when stopped in the fully-visible zone.
+      let isSnapping = false;
+      function snapIfInFadeZone() {
+        if (isSnapping) return;
+        const rect = wrap.getBoundingClientRect();
+        const p = Math.max(0, -rect.top / window.innerHeight);
+        if (p <= 0 || p >= N) return;
+        const frac = p - Math.floor(p);           // position within current slot (0–1)
+        const inFade = frac < FI || frac > (1 - FO); // in a fade zone?
+        if (!inFade) return;
+        const nearest = Math.max(0, Math.min(N - 1, Math.round(p)));
+        isSnapping = true;
+        // Snap to the middle of the nearest project's fully-visible zone (nearest + 0.5),
+        // NOT to nearest itself (which is opacity=0 at the boundary between projects).
+        window.scrollTo({ top: wrap.offsetTop + (nearest + 0.5) * window.innerHeight, behavior: 'smooth' });
+        setTimeout(() => { isSnapping = false; }, 900);
+      }
+      window.addEventListener('scrollend', snapIfInFadeZone);
+
     })();
 
     // Scroll reveal
@@ -1267,22 +1416,128 @@
 
       function updateFinale() {
         const rect = finaleScroll.getBoundingClientRect();
-        // scrollable = how far we can actually scroll through the div
-        const scrollable = finaleScroll.offsetHeight - window.innerHeight;
-        const p = Math.max(0, Math.min(1, -rect.top / scrollable));
+        // p goes 0→1 across the full visible range of the div:
+        // p=0 when div first enters viewport bottom, p=1 when fully scrolled
+        const enterPoint = window.innerHeight;
+        const exitPoint  = -(finaleScroll.offsetHeight - window.innerHeight);
+        const range      = enterPoint - exitPoint;
+        const p          = Math.max(0, Math.min(1, (enterPoint - rect.top) / range));
 
-        // Overlay covers quickly — reaches full white by p=0.6
-        finaleOverlay.style.opacity = Math.min(1, p / 0.6);
-        finaleOverlay.style.pointerEvents = p > 0.3 ? 'auto' : 'none';
+        // Overlay reaches full white by p=0.5
+        finaleOverlay.style.opacity = Math.min(1, p / 0.5);
+        finaleOverlay.style.pointerEvents = p > 0.1 ? 'auto' : 'none';
 
-        // Content starts appearing at p=0.15, fully visible at p=0.85
-        const cp = Math.max(0, Math.min(1, (p - 0.15) / 0.7));
+        // Content starts at p=0.1, fully visible at p=0.55
+        const cp = Math.max(0, Math.min(1, (p - 0.1) / 0.45));
         finaleInner.style.opacity = cp;
-        finaleInner.style.transform = `translateY(${(1 - cp) * 50}px) scale(${0.92 + cp * 0.12})`;
+        finaleInner.style.transform = `translateY(${(1 - cp) * 50}px) scale(${0.92 + cp * 0.08})`;
       }
 
       window.addEventListener('scroll', updateFinale, { passive: true });
       updateFinale();
+    })();
+
+    // ── Site-wide particles (fixed canvas, z-index: -1) ─────────────────────
+    (function () {
+      const canvas = document.getElementById('heroParticles');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+
+      const COLOR      = [125, 211, 252]; // #7dd3fc sky-blue
+      const QUANTITY   = 130;
+      const STATICITY  = 50;
+      const EASE       = 50;
+      const BASE_SIZE  = 1.2;
+
+      let w, h, circles = [];
+      const mouse = { x: 0, y: 0 };
+
+      function resize() {
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width  = w * dpr;
+        canvas.height = h * dpr;
+        canvas.style.width  = w + 'px';
+        canvas.style.height = h + 'px';
+        ctx.scale(dpr, dpr);
+        circles = [];
+        for (let i = 0; i < QUANTITY; i++) circles.push(makeCircle());
+      }
+
+      function makeCircle() {
+        return {
+          x: Math.random() * w,
+          y: Math.random() * h,
+          tx: 0, ty: 0,
+          size: Math.random() * 2 + BASE_SIZE,
+          alpha: 0,
+          targetAlpha: parseFloat((Math.random() * 0.5 + 0.3).toFixed(1)),
+          dx: (Math.random() - 0.5) * 0.1,
+          dy: (Math.random() - 0.5) * 0.1,
+          magnetism: 0.1 + Math.random() * 4,
+        };
+      }
+
+      function remap(v, s1, e1, s2, e2) {
+        const r = ((v - s1) * (e2 - s2)) / (e1 - s1) + s2;
+        return r > 0 ? r : 0;
+      }
+
+      function drawCircle(c, update) {
+        ctx.translate(c.tx, c.ty);
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, c.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${COLOR[0]},${COLOR[1]},${COLOR[2]},${c.alpha})`;
+        ctx.fill();
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        if (!update) circles.push(c);
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, w, h);
+        for (let i = circles.length - 1; i >= 0; i--) {
+          const c = circles[i];
+          const edge = [
+            c.x + c.tx - c.size,
+            w - c.x - c.tx - c.size,
+            c.y + c.ty - c.size,
+            h - c.y - c.ty - c.size,
+          ];
+          const closest = Math.min(...edge);
+          const remapped = parseFloat(remap(closest, 0, 20, 0, 1).toFixed(2));
+          if (remapped > 1) {
+            c.alpha += 0.02;
+            if (c.alpha > c.targetAlpha) c.alpha = c.targetAlpha;
+          } else {
+            c.alpha = c.targetAlpha * remapped;
+          }
+          c.x += c.dx;
+          c.y += c.dy;
+          c.tx += (mouse.x / (STATICITY / c.magnetism) - c.tx) / EASE;
+          c.ty += (mouse.y / (STATICITY / c.magnetism) - c.ty) / EASE;
+          drawCircle(c, true);
+          if (c.x < -c.size || c.x > w + c.size || c.y < -c.size || c.y > h + c.size) {
+            circles.splice(i, 1);
+            circles.push(makeCircle());
+          }
+        }
+        requestAnimationFrame(animate);
+      }
+
+      window.addEventListener('mousemove', e => {
+        const rect = canvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left - w / 2;
+        const my = e.clientY - rect.top  - h / 2;
+        if (mx < w / 2 && mx > -w / 2 && my < h / 2 && my > -h / 2) {
+          mouse.x = mx;
+          mouse.y = my;
+        }
+      });
+
+      window.addEventListener('resize', resize);
+      resize();
+      animate();
     })();
   </script>
 
